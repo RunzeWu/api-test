@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 120%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 夜雨声烦</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-01-20 20:38:13</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:16.034317</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 48，通过 22，失败 26，通过率= 45.83%</p>
+
+<p class='description'>这是描述细节</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 45.83% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 26 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 22 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 48 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 16px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>testcases.test_user.TestUser</td>
+    <td class="text-center">48</td>
+    <td class="text-center">22</td>
+    <td class="text-center">26</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',48)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_01: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in" align="left">
+    <pre>
+    
+pt1_1: 2019-01-20 20:38:13,870-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:13,871-INFO-mylog.py-test_user-日志信息:开始执行caseId为[1]的用例,用例标题是[正确账号，正确密码],请求方式是[get]
+2019-01-20 20:38:13,963-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的get请求执行成功
+2019-01-20 20:38:14,195-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_02: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse in" align="left">
+    <pre>
+    
+pt1_2: 2019-01-20 20:38:14,196-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:14,199-INFO-mylog.py-test_user-日志信息:开始执行caseId为[2]的用例,用例标题是[正确账号，错误密码],请求方式是[get]
+2019-01-20 20:38:14,282-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的get请求执行成功
+2019-01-20 20:38:14,447-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_03: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse in" align="left">
+    <pre>
+    
+pt1_3: 2019-01-20 20:38:14,448-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:14,450-INFO-mylog.py-test_user-日志信息:开始执行caseId为[3]的用例,用例标题是[账号错误],请求方式是[get]
+2019-01-20 20:38:14,581-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的get请求执行成功
+2019-01-20 20:38:14,747-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_04: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse in" align="left">
+    <pre>
+    
+pt1_4: 2019-01-20 20:38:14,749-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:14,750-INFO-mylog.py-test_user-日志信息:开始执行caseId为[4]的用例,用例标题是[不填账号],请求方式是[get]
+2019-01-20 20:38:15,109-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的get请求执行成功
+2019-01-20 20:38:15,304-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_05: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse in" align="left">
+    <pre>
+    
+pt1_5: 2019-01-20 20:38:15,305-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:15,307-INFO-mylog.py-test_user-日志信息:开始执行caseId为[5]的用例,用例标题是[不填密码],请求方式是[get]
+2019-01-20 20:38:15,445-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的get请求执行成功
+2019-01-20 20:38:15,610-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_06: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_6'>通过</button>
+    <div id='div_pt1_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_6'>通过</button>
+    <div id='div_pt1_6' class="collapse in" align="left">
+    <pre>
+    
+pt1_6: 2019-01-20 20:38:15,611-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:15,613-INFO-mylog.py-test_user-日志信息:开始执行caseId为[6]的用例,用例标题是[正确账号，正确密码],请求方式是[post]
+2019-01-20 20:38:15,736-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:15,900-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_07: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_7'>通过</button>
+    <div id='div_pt1_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_7'>通过</button>
+    <div id='div_pt1_7' class="collapse in" align="left">
+    <pre>
+    
+pt1_7: 2019-01-20 20:38:15,901-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:15,902-INFO-mylog.py-test_user-日志信息:开始执行caseId为[7]的用例,用例标题是[正确账号，错误密码],请求方式是[post]
+2019-01-20 20:38:16,025-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:16,191-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_08: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_8'>通过</button>
+    <div id='div_pt1_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_8'>通过</button>
+    <div id='div_pt1_8' class="collapse in" align="left">
+    <pre>
+    
+pt1_8: 2019-01-20 20:38:16,192-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:16,194-INFO-mylog.py-test_user-日志信息:开始执行caseId为[8]的用例,用例标题是[账号错误],请求方式是[post]
+2019-01-20 20:38:16,359-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:16,527-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_09: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_9'>通过</button>
+    <div id='div_pt1_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_9'>通过</button>
+    <div id='div_pt1_9' class="collapse in" align="left">
+    <pre>
+    
+pt1_9: 2019-01-20 20:38:16,529-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:16,530-INFO-mylog.py-test_user-日志信息:开始执行caseId为[9]的用例,用例标题是[不填账号],请求方式是[post]
+2019-01-20 20:38:16,644-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:16,812-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_login_10: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_10'>通过</button>
+    <div id='div_pt1_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_10'>通过</button>
+    <div id='div_pt1_10' class="collapse in" align="left">
+    <pre>
+    
+pt1_10: 2019-01-20 20:38:16,813-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:16,815-INFO-mylog.py-test_user-日志信息:开始执行caseId为[10]的用例,用例标题是[不填密码],请求方式是[post]
+2019-01-20 20:38:16,931-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:17,097-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_11' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_01: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_11'>失败</button>
+    <div id='div_ft1_11' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_11'>失败</button>
+    <div id='div_ft1_11' class="collapse in" align="left">
+    <pre>
+    
+ft1_11: 2019-01-20 20:38:17,098-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:17,100-INFO-mylog.py-test_user-日志信息:开始执行caseId为[1]的用例,用例标题是[获取正确cookie,然后正常充值],请求方式是[get]
+2019-01-20 20:38:17,193-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:17,305-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:17,307-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"6004.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"},预期结果:{'code': '10001', 'msg': '充值成功', 'data': {'regname': '小蜜蜂', 'leaveamount': '500.00', 'id': 1114707, 'regtime': '2019-01-17 13:32:21.0', 'type': '1', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000'}, 'status': 1}
+2019-01-20 20:38:17,476-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '10001', 'msg': '充值成功', 'data':[191 chars]: 1}" != '{"status":1,"code":"10001","data":{"id":[172 chars]成功"}'
+- {'code': '10001', 'msg': '充值成功', 'data': {'regname': '小蜜蜂', 'leaveamount': '500.00', 'id': 1114707, 'regtime': '2019-01-17 13:32:21.0', 'type': '1', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000'}, 'status': 1}
++ {"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"6004.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_12' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_02: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_12'>失败</button>
+    <div id='div_ft1_12' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_12'>失败</button>
+    <div id='div_ft1_12' class="collapse in" align="left">
+    <pre>
+    
+ft1_12: 2019-01-20 20:38:17,522-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:17,524-INFO-mylog.py-test_user-日志信息:开始执行caseId为[2]的用例,用例标题是[获取非本人cookie，然后正常充值],请求方式是[get]
+2019-01-20 20:38:17,683-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:17,898-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:17,899-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"6505.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"},预期结果:{'status': 1, 'msg': '充值成功', 'code': '10001', 'data': {'regname': '小蜜蜂', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000', 'type': '1', 'leaveamount': '1500.00', 'regtime': '2019-01-17 13:32:21.0', 'id': 1114707}}
+2019-01-20 20:38:18,066-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'status': 1, 'msg': '充值成功', 'code': '10[192 chars]07}}" != '{"status":1,"code":"10001","data":{"id":[172 chars]成功"}'
+- {'status': 1, 'msg': '充值成功', 'code': '10001', 'data': {'regname': '小蜜蜂', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000', 'type': '1', 'leaveamount': '1500.00', 'regtime': '2019-01-17 13:32:21.0', 'id': 1114707}}
++ {"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"6505.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_13' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_03: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_13'>失败</button>
+    <div id='div_ft1_13' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_13'>失败</button>
+    <div id='div_ft1_13' class="collapse in" align="left">
+    <pre>
+    
+ft1_13: 2019-01-20 20:38:18,067-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:18,069-INFO-mylog.py-test_user-日志信息:开始执行caseId为[3]的用例,用例标题是[获取正确cookie,手机号为空],请求方式是[get]
+2019-01-20 20:38:18,173-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:18,268-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:18,269-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20103","data":null,"msg":"手机号不能为空"},预期结果:{'code': '20103', 'data': None, 'msg': '手机号不能为空', 'status': 0}
+2019-01-20 20:38:18,439-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20103', 'data': None, 'msg': '手机号不能为空', 'status': 0}" != '{"status":0,"code":"20103","data":null,"msg":"手机号不能为空"}'
+- {'code': '20103', 'data': None, 'msg': '手机号不能为空', 'status': 0}
++ {"status":0,"code":"20103","data":null,"msg":"手机号不能为空"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_14' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_04: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_14'>失败</button>
+    <div id='div_ft1_14' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_14'>失败</button>
+    <div id='div_ft1_14' class="collapse in" align="left">
+    <pre>
+    
+ft1_14: 2019-01-20 20:38:18,440-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:18,443-INFO-mylog.py-test_user-日志信息:开始执行caseId为[4]的用例,用例标题是[获取正确cookie,充值金额为空],请求方式是[get]
+2019-01-20 20:38:18,563-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:18,654-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:18,656-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20115","data":null,"msg":"请输入金额"},预期结果:{'code': '20115', 'data': None, 'msg': '请输入金额', 'status': 0}
+2019-01-20 20:38:18,825-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20115', 'data': None, 'msg': '请输入金额', 'status': 0}" != '{"status":0,"code":"20115","data":null,"msg":"请输入金额"}'
+- {'code': '20115', 'data': None, 'msg': '请输入金额', 'status': 0}
++ {"status":0,"code":"20115","data":null,"msg":"请输入金额"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_15' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_05: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_15'>失败</button>
+    <div id='div_ft1_15' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_15'>失败</button>
+    <div id='div_ft1_15' class="collapse in" align="left">
+    <pre>
+    
+ft1_15: 2019-01-20 20:38:18,827-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:18,829-INFO-mylog.py-test_user-日志信息:开始执行caseId为[5]的用例,用例标题是[获取正确cookie,号码参数与cookie不对应],请求方式是[get]
+2019-01-20 20:38:18,957-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:19,058-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:19,061-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":1,"code":"10001","data":{"id":1114643,"regname":"å¤é¨å£°ç¦","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810001","leaveamount":"2522.00","type":"1","regtime":"2019-01-16 15:13:54.0"},"msg":"充值成功"},预期结果:{'msg': '充值成功', 'code': '10001', 'data': {'regtime': '2019-01-16 15:13:54.0', 'type': '1', 'leaveamount': '1.00', 'regname': 'å¤\x9cé\x9b¨å£°ç\x83¦', 'id': 1114643, 'mobilephone': '17751810001', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E'}, 'status': 1}
+2019-01-20 20:38:19,229-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'msg': '充值成功', 'code': '10001', 'data':[210 chars]: 1}" != '{"status":1,"code":"10001","data":{"id":[190 chars]成功"}'
+- {'msg': '充值成功', 'code': '10001', 'data': {'regtime': '2019-01-16 15:13:54.0', 'type': '1', 'leaveamount': '1.00', 'regname': 'å¤\x9cé\x9b¨å£°ç\x83¦', 'id': 1114643, 'mobilephone': '17751810001', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E'}, 'status': 1}
++ {"status":1,"code":"10001","data":{"id":1114643,"regname":"å¤é¨å£°ç¦","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810001","leaveamount":"2522.00","type":"1","regtime":"2019-01-16 15:13:54.0"},"msg":"充值成功"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_16' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_06: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_16'>失败</button>
+    <div id='div_ft1_16' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_16'>失败</button>
+    <div id='div_ft1_16' class="collapse in" align="left">
+    <pre>
+    
+ft1_16: 2019-01-20 20:38:19,231-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:19,232-INFO-mylog.py-test_user-日志信息:开始执行caseId为[6]的用例,用例标题是[获取正确cookie,号码参数格式不正确],请求方式是[get]
+2019-01-20 20:38:19,380-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:19,463-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:19,464-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{'status': 0, 'msg': '手机号码格式不正确', 'code': '20109', 'data': None}
+2019-01-20 20:38:19,631-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'status': 0, 'msg': '手机号码格式不正确', 'code': '20109', 'data': None}" != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {'status': 0, 'msg': '手机号码格式不正确', 'code': '20109', 'data': None}
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_17' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_07: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_17'>失败</button>
+    <div id='div_ft1_17' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_17'>失败</button>
+    <div id='div_ft1_17' class="collapse in" align="left">
+    <pre>
+    
+ft1_17: 2019-01-20 20:38:19,632-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:19,634-INFO-mylog.py-test_user-日志信息:开始执行caseId为[7]的用例,用例标题是[获取正确cookie,充值金额参数小数点后数字超过两位],请求方式是[get]
+2019-01-20 20:38:19,773-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:19,865-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:19,866-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20116","data":null,"msg":"输入金额的金额小数不能超过两位"},预期结果:{'code': '20116', 'status': 0, 'msg': '输入金额的金额小数不能超过两位', 'data': None}
+2019-01-20 20:38:20,078-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20116', 'status': 0, 'msg': '输入金额的金额小数不能超过两位', 'data': None}" != '{"status":0,"code":"20116","data":null,"msg":"输入金额的金额小数不能超过两位"}'
+- {'code': '20116', 'status': 0, 'msg': '输入金额的金额小数不能超过两位', 'data': None}
++ {"status":0,"code":"20116","data":null,"msg":"输入金额的金额小数不能超过两位"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_18' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_08: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_18'>失败</button>
+    <div id='div_ft1_18' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_18'>失败</button>
+    <div id='div_ft1_18' class="collapse in" align="left">
+    <pre>
+    
+ft1_18: 2019-01-20 20:38:20,080-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:20,081-INFO-mylog.py-test_user-日志信息:开始执行caseId为[8]的用例,用例标题是[获取正确cookie,充值金额参数小于0],请求方式是[get]
+2019-01-20 20:38:20,195-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:20,318-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:20,319-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"},预期结果:{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
+2019-01-20 20:38:20,485-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}" != '{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}'
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
++ {"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_19' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_09: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_19'>失败</button>
+    <div id='div_ft1_19' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_19'>失败</button>
+    <div id='div_ft1_19' class="collapse in" align="left">
+    <pre>
+    
+ft1_19: 2019-01-20 20:38:20,487-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:20,489-INFO-mylog.py-test_user-日志信息:开始执行caseId为[9]的用例,用例标题是[获取正确cookie,充值金额参数大于500,000],请求方式是[get]
+2019-01-20 20:38:20,571-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:20,657-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:20,659-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"},预期结果:{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
+2019-01-20 20:38:20,827-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}" != '{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}'
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
++ {"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_20' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_10: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_20'>失败</button>
+    <div id='div_ft1_20' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_20'>失败</button>
+    <div id='div_ft1_20' class="collapse in" align="left">
+    <pre>
+    
+ft1_20: 2019-01-20 20:38:20,829-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:20,830-INFO-mylog.py-test_user-日志信息:开始执行caseId为[10]的用例,用例标题是[获取正确cookie,充值金额参数填入非数字],请求方式是[get]
+2019-01-20 20:38:20,918-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:21,000-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的get请求执行成功
+2019-01-20 20:38:21,001-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20118","data":null,"msg":"请输入数字"},预期结果:{'code': '20118', 'msg': '请输入数字', 'status': 0, 'data': None}
+2019-01-20 20:38:21,171-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20118', 'msg': '请输入数字', 'status': 0, 'data': None}" != '{"status":0,"code":"20118","data":null,"msg":"请输入数字"}'
+- {'code': '20118', 'msg': '请输入数字', 'status': 0, 'data': None}
++ {"status":0,"code":"20118","data":null,"msg":"请输入数字"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_21' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_11: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_21'>失败</button>
+    <div id='div_ft1_21' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_21' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_21'>失败</button>
+    <div id='div_ft1_21' class="collapse in" align="left">
+    <pre>
+    
+ft1_21: 2019-01-20 20:38:21,174-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:21,176-INFO-mylog.py-test_user-日志信息:开始执行caseId为[11]的用例,用例标题是[获取正确cookie,然后正常充值],请求方式是[post]
+2019-01-20 20:38:21,260-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:21,378-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:21,379-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"7005.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"},预期结果:{'code': '10001', 'msg': '充值成功', 'data': {'regname': '小蜜蜂', 'leaveamount': '500.00', 'id': 1114707, 'regtime': '2019-01-17 13:32:21.0', 'type': '1', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000'}, 'status': 1}
+2019-01-20 20:38:21,546-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '10001', 'msg': '充值成功', 'data':[191 chars]: 1}" != '{"status":1,"code":"10001","data":{"id":[172 chars]成功"}'
+- {'code': '10001', 'msg': '充值成功', 'data': {'regname': '小蜜蜂', 'leaveamount': '500.00', 'id': 1114707, 'regtime': '2019-01-17 13:32:21.0', 'type': '1', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000'}, 'status': 1}
++ {"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"7005.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_22' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_12: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_22' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_22'>失败</button>
+    <div id='div_ft1_22' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_22' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_22'>失败</button>
+    <div id='div_ft1_22' class="collapse in" align="left">
+    <pre>
+    
+ft1_22: 2019-01-20 20:38:21,548-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:21,550-INFO-mylog.py-test_user-日志信息:开始执行caseId为[12]的用例,用例标题是[获取非本人cookie，然后正常充值],请求方式是[post]
+2019-01-20 20:38:21,633-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:21,732-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:21,734-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"7506.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"},预期结果:{'status': 1, 'msg': '充值成功', 'code': '10001', 'data': {'regname': '小蜜蜂', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000', 'type': '1', 'leaveamount': '1500.00', 'regtime': '2019-01-17 13:32:21.0', 'id': 1114707}}
+2019-01-20 20:38:21,904-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'status': 1, 'msg': '充值成功', 'code': '10[192 chars]07}}" != '{"status":1,"code":"10001","data":{"id":[172 chars]成功"}'
+- {'status': 1, 'msg': '充值成功', 'code': '10001', 'data': {'regname': '小蜜蜂', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E', 'mobilephone': '17751810000', 'type': '1', 'leaveamount': '1500.00', 'regtime': '2019-01-17 13:32:21.0', 'id': 1114707}}
++ {"status":1,"code":"10001","data":{"id":1114707,"regname":"小蜜蜂","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810000","leaveamount":"7506.00","type":"1","regtime":"2019-01-17 13:32:21.0"},"msg":"充值成功"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_23' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_13: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_23' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_23'>失败</button>
+    <div id='div_ft1_23' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_23' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_23'>失败</button>
+    <div id='div_ft1_23' class="collapse in" align="left">
+    <pre>
+    
+ft1_23: 2019-01-20 20:38:21,906-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:21,908-INFO-mylog.py-test_user-日志信息:开始执行caseId为[13]的用例,用例标题是[获取正确cookie,手机号为空],请求方式是[post]
+2019-01-20 20:38:21,991-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:22,075-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:22,076-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20103","data":null,"msg":"手机号不能为空"},预期结果:{'code': '20103', 'data': None, 'msg': '手机号不能为空', 'status': 0}
+2019-01-20 20:38:22,245-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20103', 'data': None, 'msg': '手机号不能为空', 'status': 0}" != '{"status":0,"code":"20103","data":null,"msg":"手机号不能为空"}'
+- {'code': '20103', 'data': None, 'msg': '手机号不能为空', 'status': 0}
++ {"status":0,"code":"20103","data":null,"msg":"手机号不能为空"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_24' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_14: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_24' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_24'>失败</button>
+    <div id='div_ft1_24' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_24' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_24'>失败</button>
+    <div id='div_ft1_24' class="collapse in" align="left">
+    <pre>
+    
+ft1_24: 2019-01-20 20:38:22,247-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:22,249-INFO-mylog.py-test_user-日志信息:开始执行caseId为[14]的用例,用例标题是[获取正确cookie,充值金额为空],请求方式是[post]
+2019-01-20 20:38:22,748-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:22,829-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:22,830-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20115","data":null,"msg":"请输入金额"},预期结果:{'code': '20115', 'data': None, 'msg': '请输入金额', 'status': 0}
+2019-01-20 20:38:22,997-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20115', 'data': None, 'msg': '请输入金额', 'status': 0}" != '{"status":0,"code":"20115","data":null,"msg":"请输入金额"}'
+- {'code': '20115', 'data': None, 'msg': '请输入金额', 'status': 0}
++ {"status":0,"code":"20115","data":null,"msg":"请输入金额"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_25' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_15: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_25' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_25'>失败</button>
+    <div id='div_ft1_25' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_25' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_25'>失败</button>
+    <div id='div_ft1_25' class="collapse in" align="left">
+    <pre>
+    
+ft1_25: 2019-01-20 20:38:22,999-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:23,001-INFO-mylog.py-test_user-日志信息:开始执行caseId为[15]的用例,用例标题是[获取正确cookie,号码参数与cookie不对应],请求方式是[post]
+2019-01-20 20:38:23,087-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:23,181-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:23,183-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":1,"code":"10001","data":{"id":1114643,"regname":"å¤é¨å£°ç¦","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810001","leaveamount":"3026.00","type":"1","regtime":"2019-01-16 15:13:54.0"},"msg":"充值成功"},预期结果:{'msg': '充值成功', 'code': '10001', 'data': {'regtime': '2019-01-16 15:13:54.0', 'type': '1', 'leaveamount': '1.00', 'regname': 'å¤\x9cé\x9b¨å£°ç\x83¦', 'id': 1114643, 'mobilephone': '17751810001', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E'}, 'status': 1}
+2019-01-20 20:38:23,353-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'msg': '充值成功', 'code': '10001', 'data':[210 chars]: 1}" != '{"status":1,"code":"10001","data":{"id":[190 chars]成功"}'
+- {'msg': '充值成功', 'code': '10001', 'data': {'regtime': '2019-01-16 15:13:54.0', 'type': '1', 'leaveamount': '1.00', 'regname': 'å¤\x9cé\x9b¨å£°ç\x83¦', 'id': 1114643, 'mobilephone': '17751810001', 'pwd': 'E10ADC3949BA59ABBE56E057F20F883E'}, 'status': 1}
++ {"status":1,"code":"10001","data":{"id":1114643,"regname":"å¤é¨å£°ç¦","pwd":"E10ADC3949BA59ABBE56E057F20F883E","mobilephone":"17751810001","leaveamount":"3026.00","type":"1","regtime":"2019-01-16 15:13:54.0"},"msg":"充值成功"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_26' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_16: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_26' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_26'>失败</button>
+    <div id='div_ft1_26' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_26' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_26'>失败</button>
+    <div id='div_ft1_26' class="collapse in" align="left">
+    <pre>
+    
+ft1_26: 2019-01-20 20:38:23,355-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:23,357-INFO-mylog.py-test_user-日志信息:开始执行caseId为[16]的用例,用例标题是[获取正确cookie,号码参数格式不正确],请求方式是[post]
+2019-01-20 20:38:23,440-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:23,528-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:23,529-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{'status': 0, 'msg': '手机号码格式不正确', 'code': '20109', 'data': None}
+2019-01-20 20:38:23,697-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'status': 0, 'msg': '手机号码格式不正确', 'code': '20109', 'data': None}" != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {'status': 0, 'msg': '手机号码格式不正确', 'code': '20109', 'data': None}
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_27' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_17: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_27' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_27'>失败</button>
+    <div id='div_ft1_27' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_27' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_27'>失败</button>
+    <div id='div_ft1_27' class="collapse in" align="left">
+    <pre>
+    
+ft1_27: 2019-01-20 20:38:23,699-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:23,701-INFO-mylog.py-test_user-日志信息:开始执行caseId为[17]的用例,用例标题是[获取正确cookie,充值金额参数小数点后数字超过两位],请求方式是[post]
+2019-01-20 20:38:23,784-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:23,865-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:23,866-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20116","data":null,"msg":"输入金额的金额小数不能超过两位"},预期结果:{'code': '20116', 'status': 0, 'msg': '输入金额的金额小数不能超过两位', 'data': None}
+2019-01-20 20:38:24,035-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20116', 'status': 0, 'msg': '输入金额的金额小数不能超过两位', 'data': None}" != '{"status":0,"code":"20116","data":null,"msg":"输入金额的金额小数不能超过两位"}'
+- {'code': '20116', 'status': 0, 'msg': '输入金额的金额小数不能超过两位', 'data': None}
++ {"status":0,"code":"20116","data":null,"msg":"输入金额的金额小数不能超过两位"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_28' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_18: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_28' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_28'>失败</button>
+    <div id='div_ft1_28' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_28' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_28'>失败</button>
+    <div id='div_ft1_28' class="collapse in" align="left">
+    <pre>
+    
+ft1_28: 2019-01-20 20:38:24,037-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:24,039-INFO-mylog.py-test_user-日志信息:开始执行caseId为[18]的用例,用例标题是[获取正确cookie,充值金额参数小于0],请求方式是[post]
+2019-01-20 20:38:24,122-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:24,236-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:24,238-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"},预期结果:{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
+2019-01-20 20:38:24,407-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}" != '{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}'
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
++ {"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_29' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_19: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_29' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_29'>失败</button>
+    <div id='div_ft1_29' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_29' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_29'>失败</button>
+    <div id='div_ft1_29' class="collapse in" align="left">
+    <pre>
+    
+ft1_29: 2019-01-20 20:38:24,409-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:24,411-INFO-mylog.py-test_user-日志信息:开始执行caseId为[19]的用例,用例标题是[获取正确cookie,充值金额参数大于500,000],请求方式是[post]
+2019-01-20 20:38:24,502-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:24,585-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:24,587-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"},预期结果:{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
+2019-01-20 20:38:24,758-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}" != '{"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}'
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0, 'data': None}
++ {"status":0,"code":"20117","data":null,"msg":"请输入范围在0到50万之间的正数金额"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_30' class='none'>
+    <td class='failCase'><div class='testcase'>test_recharge_20: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_30' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_30'>失败</button>
+    <div id='div_ft1_30' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_30' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_30'>失败</button>
+    <div id='div_ft1_30' class="collapse in" align="left">
+    <pre>
+    
+ft1_30: 2019-01-20 20:38:24,759-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:24,761-INFO-mylog.py-test_user-日志信息:开始执行caseId为[20]的用例,用例标题是[获取正确cookie,充值金额参数填入非数字],请求方式是[post]
+2019-01-20 20:38:24,912-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/login的post请求执行成功
+2019-01-20 20:38:24,995-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/recharge的post请求执行成功
+2019-01-20 20:38:24,996-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20118","data":null,"msg":"请输入数字"},预期结果:{'code': '20118', 'msg': '请输入数字', 'status': 0, 'data': None}
+2019-01-20 20:38:25,162-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 127, in test_recharge
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 122, in test_recharge
+    self.assertEqual(expected, actual)
+AssertionError: "{'code': '20118', 'msg': '请输入数字', 'status': 0, 'data': None}" != '{"status":0,"code":"20118","data":null,"msg":"请输入数字"}'
+- {'code': '20118', 'msg': '请输入数字', 'status': 0, 'data': None}
++ {"status":0,"code":"20118","data":null,"msg":"请输入数字"}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_31' class='none'>
+    <td class='failCase'><div class='testcase'>test_register_01: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_31' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_31'>失败</button>
+    <div id='div_ft1_31' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_31' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_31'>失败</button>
+    <div id='div_ft1_31' class="collapse in" align="left">
+    <pre>
+    
+ft1_31: 2019-01-20 20:38:25,164-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:25,165-INFO-mylog.py-test_user-日志信息:开始执行caseId为[1]的用例,用例标题是[正常注册],请求方式是[get]
+2019-01-20 20:38:25,252-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:25,254-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{"status":1,"code":"10001","data":null,"msg":"注册成功"}
+2019-01-20 20:38:25,458-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 58, in test_register
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 53, in test_register
+    self.assertEqual(expected, actual)
+AssertionError: '{"status":1,"code":"10001","data":null,"msg":"注册成功"}' != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {"status":1,"code":"10001","data":null,"msg":"注册成功"}
+?           ^           ^^^                     ^^^^
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+?           ^         ++  ^                     ^^^^^^^^^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_02: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_32' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_32'>通过</button>
+    <div id='div_pt1_32' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_32' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_32'>通过</button>
+    <div id='div_pt1_32' class="collapse in" align="left">
+    <pre>
+    
+pt1_32: 2019-01-20 20:38:25,459-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:25,461-INFO-mylog.py-test_user-日志信息:开始执行caseId为[2]的用例,用例标题是[手机号码已被注册],请求方式是[get]
+2019-01-20 20:38:25,549-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:25,717-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_03: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_33' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_33'>通过</button>
+    <div id='div_pt1_33' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_33' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_33'>通过</button>
+    <div id='div_pt1_33' class="collapse in" align="left">
+    <pre>
+    
+pt1_33: 2019-01-20 20:38:25,718-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:25,720-INFO-mylog.py-test_user-日志信息:开始执行caseId为[3]的用例,用例标题是[手机号码为空],请求方式是[get]
+2019-01-20 20:38:25,819-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:25,988-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_04: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_34' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_34'>通过</button>
+    <div id='div_pt1_34' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_34' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_34'>通过</button>
+    <div id='div_pt1_34' class="collapse in" align="left">
+    <pre>
+    
+pt1_34: 2019-01-20 20:38:25,989-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:25,991-INFO-mylog.py-test_user-日志信息:开始执行caseId为[4]的用例,用例标题是[密码为空],请求方式是[get]
+2019-01-20 20:38:26,071-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:26,238-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_05: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_35' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_35'>通过</button>
+    <div id='div_pt1_35' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_35' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_35'>通过</button>
+    <div id='div_pt1_35' class="collapse in" align="left">
+    <pre>
+    
+pt1_35: 2019-01-20 20:38:26,239-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:26,241-INFO-mylog.py-test_user-日志信息:开始执行caseId为[5]的用例,用例标题是[手机号码格式不正确],请求方式是[get]
+2019-01-20 20:38:26,338-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:26,504-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_06: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_36' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_36'>通过</button>
+    <div id='div_pt1_36' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_36' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_36'>通过</button>
+    <div id='div_pt1_36' class="collapse in" align="left">
+    <pre>
+    
+pt1_36: 2019-01-20 20:38:26,505-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:26,507-INFO-mylog.py-test_user-日志信息:开始执行caseId为[6]的用例,用例标题是[密码长度少于6位],请求方式是[get]
+2019-01-20 20:38:26,590-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:26,753-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_37' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_07: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_37' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_37'>通过</button>
+    <div id='div_pt1_37' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_37' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_37'>通过</button>
+    <div id='div_pt1_37' class="collapse in" align="left">
+    <pre>
+    
+pt1_37: 2019-01-20 20:38:26,754-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:26,756-INFO-mylog.py-test_user-日志信息:开始执行caseId为[7]的用例,用例标题是[密码长度大于18位],请求方式是[get]
+2019-01-20 20:38:26,837-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:27,001-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_38' class='none'>
+    <td class='failCase'><div class='testcase'>test_register_08: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_38' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_38'>失败</button>
+    <div id='div_ft1_38' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_38' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_38'>失败</button>
+    <div id='div_ft1_38' class="collapse in" align="left">
+    <pre>
+    
+ft1_38: 2019-01-20 20:38:27,003-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:27,004-INFO-mylog.py-test_user-日志信息:开始执行caseId为[8]的用例,用例标题是[注册名为空],请求方式是[get]
+2019-01-20 20:38:27,098-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:27,100-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{"status":1,"code":"10001","data":null,"msg":"注册成功"}
+2019-01-20 20:38:27,265-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 58, in test_register
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 53, in test_register
+    self.assertEqual(expected, actual)
+AssertionError: '{"status":1,"code":"10001","data":null,"msg":"注册成功"}' != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {"status":1,"code":"10001","data":null,"msg":"注册成功"}
+?           ^           ^^^                     ^^^^
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+?           ^         ++  ^                     ^^^^^^^^^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_39' class='none'>
+    <td class='failCase'><div class='testcase'>test_register_09: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_39' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_39'>失败</button>
+    <div id='div_ft1_39' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_39' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_39'>失败</button>
+    <div id='div_ft1_39' class="collapse in" align="left">
+    <pre>
+    
+ft1_39: 2019-01-20 20:38:27,267-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:27,270-INFO-mylog.py-test_user-日志信息:开始执行caseId为[9]的用例,用例标题是[注册名不为空],请求方式是[get]
+2019-01-20 20:38:27,358-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的get请求执行成功
+2019-01-20 20:38:27,359-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{"status":1,"code":"10001","data":null,"msg":"注册成功"}
+2019-01-20 20:38:27,528-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 58, in test_register
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 53, in test_register
+    self.assertEqual(expected, actual)
+AssertionError: '{"status":1,"code":"10001","data":null,"msg":"注册成功"}' != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {"status":1,"code":"10001","data":null,"msg":"注册成功"}
+?           ^           ^^^                     ^^^^
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+?           ^         ++  ^                     ^^^^^^^^^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_40' class='none'>
+    <td class='failCase'><div class='testcase'>test_register_10: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_40' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_40'>失败</button>
+    <div id='div_ft1_40' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_40' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_40'>失败</button>
+    <div id='div_ft1_40' class="collapse in" align="left">
+    <pre>
+    
+ft1_40: 2019-01-20 20:38:27,529-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:27,531-INFO-mylog.py-test_user-日志信息:开始执行caseId为[10]的用例,用例标题是[正常注册],请求方式是[post]
+2019-01-20 20:38:27,609-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:27,611-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{"status":1,"code":"10001","data":null,"msg":"注册成功"}
+2019-01-20 20:38:27,780-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 58, in test_register
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 53, in test_register
+    self.assertEqual(expected, actual)
+AssertionError: '{"status":1,"code":"10001","data":null,"msg":"注册成功"}' != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {"status":1,"code":"10001","data":null,"msg":"注册成功"}
+?           ^           ^^^                     ^^^^
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+?           ^         ++  ^                     ^^^^^^^^^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_41' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_11: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_41' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_41'>通过</button>
+    <div id='div_pt1_41' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_41' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_41'>通过</button>
+    <div id='div_pt1_41' class="collapse in" align="left">
+    <pre>
+    
+pt1_41: 2019-01-20 20:38:27,782-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:27,784-INFO-mylog.py-test_user-日志信息:开始执行caseId为[11]的用例,用例标题是[手机号码已被注册],请求方式是[post]
+2019-01-20 20:38:27,878-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:28,045-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_42' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_12: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_42' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_42'>通过</button>
+    <div id='div_pt1_42' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_42' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_42'>通过</button>
+    <div id='div_pt1_42' class="collapse in" align="left">
+    <pre>
+    
+pt1_42: 2019-01-20 20:38:28,046-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:28,047-INFO-mylog.py-test_user-日志信息:开始执行caseId为[12]的用例,用例标题是[手机号码为空],请求方式是[post]
+2019-01-20 20:38:28,135-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:28,302-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_43' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_13: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_43' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_43'>通过</button>
+    <div id='div_pt1_43' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_43' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_43'>通过</button>
+    <div id='div_pt1_43' class="collapse in" align="left">
+    <pre>
+    
+pt1_43: 2019-01-20 20:38:28,303-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:28,305-INFO-mylog.py-test_user-日志信息:开始执行caseId为[13]的用例,用例标题是[密码为空],请求方式是[post]
+2019-01-20 20:38:28,392-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:28,558-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_44' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_14: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_44' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_44'>通过</button>
+    <div id='div_pt1_44' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_44' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_44'>通过</button>
+    <div id='div_pt1_44' class="collapse in" align="left">
+    <pre>
+    
+pt1_44: 2019-01-20 20:38:28,559-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:28,561-INFO-mylog.py-test_user-日志信息:开始执行caseId为[14]的用例,用例标题是[手机号码格式不正确],请求方式是[post]
+2019-01-20 20:38:28,656-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:28,865-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_45' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_15: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_45' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_45'>通过</button>
+    <div id='div_pt1_45' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_45' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_45'>通过</button>
+    <div id='div_pt1_45' class="collapse in" align="left">
+    <pre>
+    
+pt1_45: 2019-01-20 20:38:28,866-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:28,869-INFO-mylog.py-test_user-日志信息:开始执行caseId为[15]的用例,用例标题是[密码长度少于6位],请求方式是[post]
+2019-01-20 20:38:28,952-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:29,120-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_46' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_register_16: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_46' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_46'>通过</button>
+    <div id='div_pt1_46' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_46' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_46'>通过</button>
+    <div id='div_pt1_46' class="collapse in" align="left">
+    <pre>
+    
+pt1_46: 2019-01-20 20:38:29,121-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:29,123-INFO-mylog.py-test_user-日志信息:开始执行caseId为[16]的用例,用例标题是[密码长度大于18位],请求方式是[post]
+2019-01-20 20:38:29,209-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:29,376-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_47' class='none'>
+    <td class='failCase'><div class='testcase'>test_register_17: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_47' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_47'>失败</button>
+    <div id='div_ft1_47' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_47' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_47'>失败</button>
+    <div id='div_ft1_47' class="collapse in" align="left">
+    <pre>
+    
+ft1_47: 2019-01-20 20:38:29,377-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:29,379-INFO-mylog.py-test_user-日志信息:开始执行caseId为[17]的用例,用例标题是[注册名为空],请求方式是[post]
+2019-01-20 20:38:29,467-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:29,469-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{"status":1,"code":"10001","data":null,"msg":"注册成功"}
+2019-01-20 20:38:29,637-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 58, in test_register
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 53, in test_register
+    self.assertEqual(expected, actual)
+AssertionError: '{"status":1,"code":"10001","data":null,"msg":"注册成功"}' != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {"status":1,"code":"10001","data":null,"msg":"注册成功"}
+?           ^           ^^^                     ^^^^
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+?           ^         ++  ^                     ^^^^^^^^^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_48' class='none'>
+    <td class='failCase'><div class='testcase'>test_register_18: dict() -> new empty dictionary</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_48' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_48'>失败</button>
+    <div id='div_ft1_48' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_48' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_48'>失败</button>
+    <div id='div_ft1_48' class="collapse in" align="left">
+    <pre>
+    
+ft1_48: 2019-01-20 20:38:29,639-INFO-mylog.py-test_user-日志信息:*******开始执行测试用例*********
+2019-01-20 20:38:29,640-INFO-mylog.py-test_user-日志信息:开始执行caseId为[18]的用例,用例标题是[注册名不为空],请求方式是[post]
+2019-01-20 20:38:29,732-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/register的post请求执行成功
+2019-01-20 20:38:29,734-WARNING-mylog.py-test_user-日志信息:实际结果与预期结果不同，实际结果:{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"},预期结果:{"status":1,"code":"10001","data":null,"msg":"注册成功"}
+2019-01-20 20:38:29,902-INFO-mylog.py-test_user-日志信息:*******本条测试用例执行完毕*********
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 58, in test_register
+    raise e
+  File "D:\PYworkspace\api-test\testcases\test_user.py", line 53, in test_register
+    self.assertEqual(expected, actual)
+AssertionError: '{"status":1,"code":"10001","data":null,"msg":"注册成功"}' != '{"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}'
+- {"status":1,"code":"10001","data":null,"msg":"注册成功"}
+?           ^           ^^^                     ^^^^
++ {"status":0,"code":"20109","data":null,"msg":"手机号码格式不正确"}
+?           ^         ++  ^                     ^^^^^^^^^
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>48</td>
+    <td>22</td>
+    <td>26</td>
+    <td>0</td>
+    <td>通过率：45.83%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>
