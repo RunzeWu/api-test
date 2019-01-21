@@ -33,13 +33,18 @@ class OperateDB:
         return res
 
     def query_leaveAmount(self, mobile):
-        sql = "SELECT LeaveAmount FROM member WHERE MobilePhone=" + mobile + ";"
-        print(sql)
-        self.cursor.execute(sql)
+        if mobile is not None:
+            sql = "SELECT LeaveAmount FROM member WHERE MobilePhone=" + mobile + ";"
+            print(sql)
+            self.cursor.execute(sql)
 
-        data = self.cursor.fetchall()  # 获取所有的数据
-        res = data[0][0]
-        self.close_database()
+            data = self.cursor.fetchall()  # 获取所有的数据
+            res = data[0][0]
+            self.close_database()
+        else:
+            res = None
+
+
         return res
 
 
