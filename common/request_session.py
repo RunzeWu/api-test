@@ -8,25 +8,28 @@
 import requests
 from common.mylog import Mylog
 from common.myjson import MyJson
+
 mylog = Mylog("session_requset")
+
+
 class Request:
 
     def __init__(self):
         self.session = requests.sessions.session()
 
-    def request(self,url,method,params=None,data=None):
+    def request(self, url, method,params=None,data=None):
         method = method.upper()
 
-        if params is not None and type(params)==str:
+        if params is not None and type(params) == str:
             params = MyJson().to_python_str(params)
 
-        if data is not None and type(data)==str:
+        if data is not None and type(data) == str:
             data = MyJson().to_python_str(data)
 
         if method == "GET":
-            res = self.session.get(url, params = params)
+            res = self.session.get(url, params=params)
         elif method == "POST":
-            res = self.session.post(url,data=data)
+            res = self.session.post(url, data=data)
         else:
             mylog.error("请检查请求方式是否正确")
             raise Exception("请检查请求方式是否正确")

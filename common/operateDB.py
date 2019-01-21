@@ -32,8 +32,19 @@ class OperateDB:
         self.close_database()
         return res
 
+    def query_leaveAmount(self, mobile):
+        sql = "SELECT LeaveAmount FROM member WHERE MobilePhone=" + mobile + ";"
+        print(sql)
+        self.cursor.execute(sql)
+
+        data = self.cursor.fetchall()  # 获取所有的数据
+        res = data[0][0]
+        self.close_database()
+        return res
+
+
 
 if __name__ == '__main__':
     A = OperateDB()
-    res = A.query_the_largest_phone_number()
+    res = A.query_leaveAmount("13755120067")
     print(res)

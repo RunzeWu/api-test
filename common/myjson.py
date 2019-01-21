@@ -13,12 +13,12 @@ class MyJson:
         res = json.dumps(obj, indent=4, sort_keys=True, separators=(',', ': '))
         return res
 
-    def to_python_str(self, obj):
+    def to_python_dict(self, obj):
         res = json.loads(obj, encoding="utf-8")
         return res
 
     def to_result(self, json_str, expr):
-        json_obj = self.to_python_str(json_str)
+        json_obj = self.to_python_dict(json_str)
         result = jsonpath.jsonpath(json_obj, expr)
         # 返回的是result，list
         return result
@@ -27,11 +27,13 @@ class MyJson:
 if __name__ == '__main__':
     A = MyJson()
     data = {'data': None, 'status': 0, 'msg': '手机号码格式不正确', 'code': '20109'}
-    res = A.to_json(data)
-    print(res)
-    res = A.to_result(res,"$.status")
-    print(res)
-    for item in res:
-        print(item)
+    B = '{"status":0,"code":"20103","data":null,"msg":"密码不能为空"}'
+    print(type(A.to_python_dict(B)))
+    # res = A.to_json(data)
+    # print(res)
+    # res = A.to_result(res,"$.status")
+    # print(res)
+    # for item in res:
+    #     print(item)
     # res = A.to_python(res)
     # print(res)
