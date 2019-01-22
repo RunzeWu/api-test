@@ -3,7 +3,7 @@
 # @Time     :2019/1/5 21:54
 # @Author   :Yosef
 # E-mail    :wurz529@foxmail.com
-# File      :run_new.py
+# File      :run.py
 # Software  :PyCharm Community Edition
 import unittest
 import HTMLTestRunnerNew

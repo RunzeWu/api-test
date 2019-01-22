@@ -47,11 +47,13 @@ class HttpRequests:
 
 
 if __name__ == "__main__":
-    url = "http://47.107.168.87:8080/futureloan/mvc/api/member/register"
-    params = '{"mobilephone": "17751810779", "pwd": "123464", "regname": null}'
-    data = {"mobilephone": "17751810779", "pwd": "123464", "regname": "夜雨声烦"}
+    url = "http://47.107.168.87:8080/futureloan/mvc/api/member/login"
+    url1 = "http://47.107.168.87:8080/futureloan/mvc/api/member/withdraw"
+    params = {"mobilephone": "17751810779", "pwd": "123456"}
+    params1 = {"mobilephone": "17751810779", "amount": "500000"}
     res = HttpRequests(url, params).http_requests("get")
-
+    cookie = res.cookies
+    res=HttpRequests(url1, params1).http_requests("get",cookies=cookie)
     print(res.json())
 
 
