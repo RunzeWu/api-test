@@ -13,31 +13,28 @@ logger = Mylog("http_requests")
 
 
 class HttpRequests:
-    def __init__(self, url, params=None, data=None, headers=None, json=None):
+    def __init__(self, url, params=None, headers=None, json=None):
         self.url = url
         self.params = params
-        self.data = data
         self.headers = headers
         self.json = json
 
     def http_requests(self, method, cookies=None):
 
         if self.params is not None and type(self.params)==str:
-            self.params = MyJson().to_python_str(self.params)
+            self.params = MyJson().to_python_dict(self.params)
 
-        if self.data is not None and type(self.data)==str:
-            self.data = MyJson().to_python_str(self.data)
 
         if method.upper() == "GET":
             try:
-                res = requests.get(self.url, self.params, headers=self.headers, cookies=cookies)
+                res = requests.get(self.url, params=self.params, headers=self.headers, cookies=cookies)
                 logger.info("url:{}的get请求执行成功".format(self.url))
             except Exception as e:
                 logger.info("执行get请求报错，报错信息是{}".format(e))
                 res = e
         elif method.upper() == "POST":
             try:
-                res = requests.post(self.url, data=self.data, headers=self.headers, json=self.json, cookies=cookies)
+                res = requests.post(self.url, data=self.params, headers=self.headers, json=self.json, cookies=cookies)
                 logger.info("url:{}的post请求执行成功".format(self.url))
             except Exception as e:
                 logger.info("执行post请求报错，报错信息是{}".format(e))
@@ -53,7 +50,7 @@ if __name__ == "__main__":
     url = "http://47.107.168.87:8080/futureloan/mvc/api/member/register"
     params = '{"mobilephone": "17751810779", "pwd": "123464", "regname": null}'
     data = {"mobilephone": "17751810779", "pwd": "123464", "regname": "夜雨声烦"}
-    res = HttpRequests(url, params=params).http_requests("get")
+    res = HttpRequests(url, params).http_requests("get")
 
     print(res.json())
 

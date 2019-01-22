@@ -9,10 +9,11 @@ import openpyxl
 from common.read_configuration import ReadConfig
 from common.contants import FilePath
 from common.mylog import Mylog
-from common.operateDB import OperateDB
+from common.mysql import MysqlUtil
 
 filepath = FilePath()
 logger = Mylog("读取数据")
+
 
 class DoExcel:
     def __init__(self, filepath, sheet_name):
@@ -32,7 +33,6 @@ class DoExcel:
         sh.cell(1, 2).value = value
         wb.save(self.filepath)
 
-
     def read_data(self):
         """
         每次都是根据数据库member表号码最大值为参照来替换注册号码数据
@@ -43,8 +43,6 @@ class DoExcel:
         logger.info("开始读取{}中的{}数据".format(self.filepath, self.sheet_name))
 
         col_max = sh.max_column
-        mobile = OperateDB().query_the_largest_phone_number()
-        self.update_init_data(str(int(mobile)+1))
 
         testdata_key = []
         for i in range(1, col_max + 1):
@@ -56,17 +54,7 @@ class DoExcel:
             for i in range(2, row_max + 1):
                 testdata = {}
                 for j in range(1, col_max + 1):
-                    mobile = self.get_init_data()
-                    if j != 5:
-                        testdata[testdata_key[j - 1]] = sh.cell(i, j).value
-                    else:
-                        # print(sh.cell(i, j).value)
-                        if sh.cell(i, j).value.find("${mobile}") != -1:
-                            testdata[testdata_key[j - 1]] = sh.cell(i, j).value.replace("${mobile}", str(mobile))
-                            # print(type(mobile))
-                            self.update_init_data(str(int(mobile) + 1))
-                        else:
-                            testdata[testdata_key[j - 1]] = sh.cell(i, j).value
+                    testdata[testdata_key[j - 1]] = sh.cell(i, j).value
                 testdatas.append(testdata)
             logger.info("读取完毕")
         else:
@@ -83,24 +71,9 @@ class DoExcel:
             for i in new_conf:
                 testdata = {}
                 for j in range(1, col_max + 1):
-                    mobile = self.get_init_data()
-                    if j != 5:
-                        testdata[testdata_key[j - 1]] = sh.cell(i, j).value
-                    else:
-                        '''
-                        对号码参数做判断
-                        '''
-                        # print(sh.cell(i, j).value)
-                        if sh.cell(i, j).value.find("${mobile}") != -1:
-                            # mobile = OperateDB().query_the_largest_phone_number()
-                            # mobile = int(mobile) + 1
-                            testdata[testdata_key[j - 1]] = sh.cell(i, j).value.replace("${mobile}", str(mobile))
-                            self.update_init_data(str(int(mobile) + 1))
-                        else:
-                            testdata[testdata_key[j - 1]] = sh.cell(i, j).value
+                    testdata[testdata_key[j - 1]] = sh.cell(i, j).value
                 testdatas.append(testdata)
             logger.info("读取完毕")
-
 
         return testdatas
 

@@ -3,11 +3,11 @@
 # @Time     :2019/1/20 13:08
 # @Author   :Yosef-夜雨声烦
 # E-mail    :wurz529@foxmail.com
-# File      :operateDB.py
+# File      :mysql.py
 # Software  :PyCharm Community Edition
 import pymysql
 
-class OperateDB:
+class MysqlUtil:
 
     def __init__(self):
         self.database = pymysql.connect(
@@ -20,36 +20,20 @@ class OperateDB:
         self.cursor = self.database.cursor() # 获取一个游标 — 也就是开辟一个缓冲区，用于存放sql语句执行的结果
 
     def close_database(self):
+        self.cursor.close()
         self.database.close()
 
-    def query_the_largest_phone_number(self):
-        # 执行sql语句,从sql中获取/选择数据,执行数据
-        sql = "SELECT MAX(MobilePhone) FROM member;"
+    def fetchone(self, sql):
+        # 执行SQL
         self.cursor.execute(sql)
-
-        data = self.cursor.fetchall()  # 获取所有的数据
-        res = data[0][0]
-        self.close_database()
-        return res
-
-    def query_leaveAmount(self, mobile):
-        if mobile is not None:
-            sql = "SELECT LeaveAmount FROM member WHERE MobilePhone=" + mobile + ";"
-            print(sql)
-            self.cursor.execute(sql)
-
-            data = self.cursor.fetchall()  # 获取所有的数据
-            res = data[0][0]
-            self.close_database()
-        else:
-            res = None
-
-
-        return res
-
+        # 获取结果
+        result = self.cursor.fetchone()
+        return result[0]  # 返回结果
 
 
 if __name__ == '__main__':
-    A = OperateDB()
-    res = A.query_leaveAmount("13755120067")
+    A = MysqlUtil()
+    sql = "select max(MobilePhone) from member"
+    res = A.fetchone(sql)
+    print(type(res))
     print(res)

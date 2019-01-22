@@ -21,10 +21,10 @@ class Request:
         method = method.upper()
 
         if params is not None and type(params) == str:
-            params = MyJson().to_python_str(params)
+            params = MyJson().to_python_dict(params)
 
         if data is not None and type(data) == str:
-            data = MyJson().to_python_str(data)
+            data = MyJson().to_python_dict(data)
 
         if method == "GET":
             res = self.session.get(url, params=params)
