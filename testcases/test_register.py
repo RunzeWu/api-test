@@ -31,6 +31,7 @@ class TestRegister(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.mysql.close_database()
+        logger.info("************register模块测试用例脚本执行完毕*****************")
 
     def setUp(self):
         sql = "select max(mobilephone) from member"

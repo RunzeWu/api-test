@@ -25,7 +25,10 @@ class TestLogin(unittest.TestCase):
     def setUpClass(cls):
         logger.info("************开始执行login模块测试用例*****************")
 
-    # @unittest.skip("login")
+    @classmethod
+    def tearDownClass(cls):
+        logger.info("************login模块测试用例脚本执行完毕*****************")
+
     @data(*login_data)
     def test_login(self, value):
         caseid = value["caseId"]

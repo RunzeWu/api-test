@@ -28,7 +28,7 @@ report_path = FilePath().report_path()
 print(report_path)
 
 with open(report_path, "wb+") as file:
-    runner = HTMLTestRunnerNew.HTMLTestRunner(stream=file, verbosity=2,title="前程贷接口测试报告", description="测试了注册，登录，充值，取现模块的接口",
+    runner = HTMLTestRunnerNew.HTMLTestRunner(stream=file, verbosity=2, title="前程贷接口测试报告", description="测试了注册，登录，充值，取现模块的接口",
                                               tester="夜雨声烦")
     runner.run(suite)
 

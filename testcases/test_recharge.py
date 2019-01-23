@@ -31,6 +31,7 @@ class TestRecharge(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.mysql.close_database()
+        logger.info("************recharge模块测试用例脚本执行完毕*****************")
 
     def setUp(self):
         logger.info("*******开始执行测试用例*********")
