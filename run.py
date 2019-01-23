@@ -10,6 +10,7 @@ import HTMLTestRunnerNew
 from testcases.test_recharge import TestRecharge
 from testcases.test_register import TestRegister
 from testcases.test_login import TestLogin
+from testcases.test_withdraw import TestWithdraw
 from common.contants import FilePath
 from common.send_mail import SendMail
 
@@ -20,6 +21,7 @@ loader = unittest.TestLoader()
 suite.addTest(loader.loadTestsFromTestCase(TestRegister))
 suite.addTest(loader.loadTestsFromTestCase(TestLogin))
 suite.addTest(loader.loadTestsFromTestCase(TestRecharge))
+suite.addTest(loader.loadTestsFromTestCase(TestWithdraw))
 
 # report_path = "result/reports/a.html"
 report_path = FilePath().report_path()
