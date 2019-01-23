@@ -24,6 +24,7 @@ class TestWithdraw(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        logger.info("************开始执行withdraw模块测试用例*****************")
         cls.mysql = MysqlUtil()
 
     @classmethod

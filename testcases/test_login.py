@@ -21,6 +21,10 @@ class TestLogin(unittest.TestCase):
     filepath = FilePath()
     login_data = DoExcel(filepath.test_data_data(), "login").read_data()
 
+    @classmethod
+    def setUpClass(cls):
+        logger.info("************开始执行login模块测试用例*****************")
+
     # @unittest.skip("login")
     @data(*login_data)
     def test_login(self, value):

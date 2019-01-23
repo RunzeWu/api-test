@@ -24,6 +24,7 @@ class TestRegister(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        logger.info("************开始执行register模块测试用例*****************")
         cls.mysql = MysqlUtil()
 
 
