@@ -43,7 +43,7 @@ class TestRegister(unittest.TestCase):
         caseid = value["caseId"]
         title = value["title"]
         method = value["method"]
-        url = filepath.api_url() + value["url"]
+        url = value["url"]
         param = MyJson().to_python_dict(value["param"])
         expected = value["expected"]
         logger.info("当前模块是{},开始执行caseId为[{}]的用例,用例标题是[{}],请求方式是[{}]".format("register", caseid, title, method))

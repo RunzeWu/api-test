@@ -43,9 +43,9 @@ class TestWithdraw(unittest.TestCase):
         caseid = value["caseId"]
         title = value["title"]
         method = value["method"]
-        pre_url = self.filepath.api_url() + value["pre_url"]
+        pre_url = value["pre_url"]
         pre_param = eval(value["pre_param"])
-        url = self.filepath.api_url() + value["url"]
+        url = value["url"]
         param = eval(value["param"])
         expected = eval(value["expected"])
 

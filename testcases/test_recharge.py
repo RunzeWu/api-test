@@ -44,9 +44,9 @@ class TestRecharge(unittest.TestCase):
         caseid = value["caseId"]
         title = value["title"]
         method = value["method"]
-        pre_url = self.filepath.api_url() + value["pre_url"]
+        pre_url = value["pre_url"]
         pre_param = MyJson().to_python_dict(value["pre_param"])
-        url = self.filepath.api_url() + value["url"]
+        url = value["url"]
         param = MyJson().to_python_dict(value["param"])
         expected = value["expected"]
 

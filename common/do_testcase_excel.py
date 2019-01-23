@@ -6,10 +6,9 @@
 # File      :do_testcase_excel.py
 # Software  :PyCharm Community Edition
 import openpyxl
-from common.read_configuration import ReadConfig
+from common.config import ReadConfig
 from common.contants import FilePath
 from common.mylog import Mylog
-from common.mysql import MysqlUtil
 
 filepath = FilePath()
 logger = Mylog("读取数据")
@@ -19,7 +18,7 @@ class DoExcel:
     def __init__(self, filepath, sheet_name):
         self.filepath = filepath
         self.sheet_name = sheet_name
-        self.conf = ReadConfig(FilePath().conf_path()).get_value("test_case_id", "button")
+        self.conf = ReadConfig().get_value("test_case_id", "button")
 
     def get_init_data(self):
         wb = openpyxl.load_workbook(self.filepath)
@@ -61,8 +60,8 @@ class DoExcel:
             try:
                 conf = eval(self.conf)
             except Exception:
-                logger.info("请检查{}文件中[test_case_id]的button的value是否符合要求！！".format(filepath.conf_path()))
-                raise Exception("请检查{}文件中[test_case_id]的button的value是否符合要求！！".format(filepath.conf_path()))
+                logger.info("请检查配置文件中[test_case_id]的button的value是否符合要求！！")
+                raise Exception("请检查配置文件中[test_case_id]的button的value是否符合要求！！")
             new_conf = []
             for run_case_id in conf:
                 run_case_row = run_case_id + 1

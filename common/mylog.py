@@ -6,17 +6,17 @@
 # File      :mylog.py
 # Software  :PyCharm Community Edition
 import logging
-from common.read_configuration import ReadConfig
+from common.config import ReadConfig
 from common.contants import FilePath
 
 
 class Mylog:
     def __init__(self, log_name):
         self.log_name = log_name
-        self.in_level = ReadConfig(FilePath().conf_path()).get_value("log", "in_level")
-        self.ch_level = ReadConfig(FilePath().conf_path()).get_value("log", "ch_level")
-        self.fh_level = ReadConfig(FilePath().conf_path()).get_value("log", "fh_level")
-        self.formatter = ReadConfig(FilePath().conf_path()).get_value("log", "formatter")
+        self.in_level = ReadConfig().get_value("log", "in_level")
+        self.ch_level = ReadConfig().get_value("log", "ch_level")
+        self.fh_level = ReadConfig().get_value("log", "fh_level")
+        self.formatter = ReadConfig().get_value("log", "formatter")
 
     def mylog(self, level, msg):
         logger = logging.Logger(self.log_name)

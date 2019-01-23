@@ -6,7 +6,7 @@
 # File      :do_receivers_excel.py
 # Software  :PyCharm Community Edition
 import openpyxl
-from common.read_configuration import ReadConfig
+from common.config import ReadConfig
 from common.mylog import Mylog
 from common.contants import FilePath
 
@@ -24,7 +24,7 @@ class DoExcel:
     def __init__(self, filepath, sheet_name):
         self.filepath = filepath
         self.sheet_name = sheet_name
-        self.conf = ReadConfig(FilePath().conf_path()).get_value("receiver_id", "button")
+        self.conf = ReadConfig().get_value("receiver_id", "button")
 
     def read_data(self):
         wb = openpyxl.load_workbook(self.filepath)

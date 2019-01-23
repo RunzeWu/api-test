@@ -34,7 +34,7 @@ class TestLogin(unittest.TestCase):
         caseid = value["caseId"]
         title = value["title"]
         method = value["method"]
-        url = self.filepath.api_url() + value["url"]
+        url = value["url"]
         param = eval(value["param"])
         expected = value["expected"]
 

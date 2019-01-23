@@ -8,13 +8,16 @@
 import requests
 from common.mylog import Mylog
 from common.myjson import MyJson
+from common.config import ReadConfig
 
 logger = Mylog("http_requests")
+pre_url = ReadConfig().get_value("env-api", "pre_url")
+# print(pre_url)
 
 
 class HttpRequests:
     def __init__(self, url, params=None, headers=None, json=None):
-        self.url = url
+        self.url = pre_url + url
         self.params = params
         self.headers = headers
         self.json = json
@@ -23,7 +26,6 @@ class HttpRequests:
 
         if self.params is not None and type(self.params)==str:
             self.params = MyJson().to_python_dict(self.params)
-
 
         if method.upper() == "GET":
             try:
@@ -47,13 +49,14 @@ class HttpRequests:
 
 
 if __name__ == "__main__":
-    url = "http://47.107.168.87:8080/futureloan/mvc/api/member/login"
-    url1 = "http://47.107.168.87:8080/futureloan/mvc/api/member/withdraw"
+    url = "/member/login"
+    url1 = "/member/withdraw"
     params = {"mobilephone": "17751810779", "pwd": "123456"}
     params1 = {"mobilephone": "17751810779", "amount": "500000"}
     res = HttpRequests(url, params).http_requests("get")
+    print(HttpRequests(url, params).url)
     cookie = res.cookies
-    res=HttpRequests(url1, params1).http_requests("get",cookies=cookie)
+    res=HttpRequests(url1, params1).http_requests("get", cookies=cookie)
     print(res.json())
 
 
