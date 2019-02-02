@@ -50,13 +50,16 @@ class HttpRequests:
 
 if __name__ == "__main__":
     url = "/member/login"
-    url1 = "/member/withdraw"
+    url1 = "/member/list"
     params = {"mobilephone": "17751810779", "pwd": "123456"}
     params1 = {"mobilephone": "17751810779", "amount": "500000"}
     res = HttpRequests(url, params).http_requests("get")
     print(HttpRequests(url, params).url)
     cookie = res.cookies
-    res=HttpRequests(url1, params1).http_requests("get", cookies=cookie)
-    print(res.json())
+    res=HttpRequests(url1).http_requests("get", cookies=cookie)
+    res.encoding="utf-8"
+    print(res.json()["data"])
+    for item in res.json()["data"]:
+        print(item)
 
 

@@ -8,27 +8,15 @@
 import configparser
 from common.contants import FilePath
 
-# config = configparser.ConfigParser()
-# config.read(FilePath().global_conf_path())
-# open = config.getboolean("switch", "open")
-#
-# if open:
-#     config.read(FilePath().test_conf_path())
-# else:
-#     config.read(FilePath().prod_conf_path())
-#
-# value = config.get("env-api", "pre_url")
-# print(value)
-
 
 class ReadConfig:
     def __init__(self):
 
         self.cf = configparser.ConfigParser()
         self.cf.read(FilePath().global_conf_path(), encoding="utf-8")
-        open = self.cf.getboolean("switch", "open")
+        button = self.cf.getboolean("switch", "button")
 
-        if open:
+        if button:
             self.cf.read(FilePath().test_conf_path(), encoding="utf-8")
         else:
             self.cf.read(FilePath().prod_conf_path(), encoding="utf-8")
