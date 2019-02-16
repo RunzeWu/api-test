@@ -36,8 +36,9 @@ class FilePath:
         return path
 
     def report_path(self):
-        report_time = time.strftime("%Y-%m-%d-%H-%M-%S")
-        report_name = report_time + " api test_report.html"
+        # report_time = time.strftime("%Y-%m-%d-%H-%M-%S")
+        # report_name = report_time + " api test_report.html"
+        report_name = "api test_report.html"
         path = os.path.join(self.dir_path, "reports", report_name)
         # path = ReadConfig(self.conf_path()).get_value("report","file_path")+report_name
         return path
