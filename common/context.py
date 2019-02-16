@@ -48,11 +48,13 @@ def replace_new(s):
     return s
 
 
-s = '{"mobilephone":"${admin_user}","pwd":"${admin_pwd}"}'
-# data = {"admin_user": "15873171553", "admin_pwd": "123456"}
-#
-# s = replace(s, data)
-# print(s)
+if __name__ == '__main__':
 
-s = replace_new(s)
-print(s)
+    s = '{"mobilephone":"${admin_user}","pwd":"${admin_pwd}"}'
+    # data = {"admin_user": "15873171553", "admin_pwd": "123456"}
+    #
+    # s = replace(s, data)
+    # print(s)
+
+    s = replace_new(s)
+    print(s)
