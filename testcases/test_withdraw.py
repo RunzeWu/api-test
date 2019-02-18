@@ -8,7 +8,7 @@
 import unittest
 import re
 from libext.ddt import ddt, data
-from common.contants import FilePath
+from common import contants
 from common.do_testcase_excel import DoExcel
 from common.mysql import MysqlUtil
 from common.mylog import Mylog
@@ -19,8 +19,7 @@ logger = Mylog("test_withdraw")
 
 @ddt
 class TestWithdraw(unittest.TestCase):
-    filepath = FilePath()
-    withdraw_data = DoExcel(filepath.test_data_data(), "withdraw").read_data()
+    withdraw_data = DoExcel(contants.case_file, "withdraw").read_data()
 
     @classmethod
     def setUpClass(cls):
@@ -93,8 +92,8 @@ class TestWithdraw(unittest.TestCase):
                 logger.warning("实际结果与预期结果不同，实际结果:{},预期结果:{}".format(actual, expected))
                 raise e
             finally:
-                DoExcel(FilePath().test_data_data(), "withdraw").write_data(caseid + 1, 9, str(actual))
-                DoExcel(FilePath().test_data_data(), "withdraw").write_data(caseid + 1, 10, res)
+                DoExcel(contants.case_file, "withdraw").write_data(caseid + 1, 9, str(actual))
+                DoExcel(contants.case_file, "withdraw").write_data(caseid + 1, 10, res)
         else:
             res = "Failed"
             try:
@@ -104,8 +103,8 @@ class TestWithdraw(unittest.TestCase):
                 logger.warning("实际结果与预期结果不同，实际结果:{},预期结果:{}".format(actual, expected))
                 raise e
             finally:
-                DoExcel(FilePath().test_data_data(), "withdraw").write_data(caseid + 1, 9, str(actual))
-                DoExcel(FilePath().test_data_data(), "withdraw").write_data(caseid + 1, 10, res)
+                DoExcel(contants.case_file, "withdraw").write_data(caseid + 1, 9, str(actual))
+                DoExcel(contants.case_file, "withdraw").write_data(caseid + 1, 10, res)
 
 
 if __name__ == '__main__':

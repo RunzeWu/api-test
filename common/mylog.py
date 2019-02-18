@@ -7,7 +7,7 @@
 # Software  :PyCharm Community Edition
 import logging
 from common.config import ReadConfig
-from common.contants import FilePath
+from common import contants
 
 
 class Mylog:
@@ -27,7 +27,7 @@ class Mylog:
         ch.setLevel(self.ch_level)
         ch.setFormatter(formatter)
 
-        fh = logging.FileHandler(FilePath().log_path(), encoding="utf-8")
+        fh = logging.FileHandler(contants.logs_log, encoding="utf-8")
         fh.setLevel(self.fh_level)
         fh.setFormatter(formatter)
 

@@ -8,7 +8,7 @@
 import openpyxl
 from common.config import ReadConfig
 from common.mylog import Mylog
-from common.contants import FilePath
+from common import contants
 
 mylog = Mylog("读取excel文件")
 
@@ -42,8 +42,8 @@ class DoExcel:
             try:
                 conf = eval(self.conf)
             except Exception:
-                mylog.error("请检查{}文件中[receiver_id]的button的value是否符合要求！！".format(FilePath().receivers()))
-                raise Exception("请检查{}文件中[receiver_id]的button的value是否符合要求！！".format(FilePath().receivers()))
+                mylog.error("请检查{}文件中[receiver_id]的button的value是否符合要求！！".format(contants.receiver_file))
+                raise Exception("请检查{}文件中[receiver_id]的button的value是否符合要求！！".format(contants.receiver_file))
             new_conf = []
             for run_case_id in conf:
                 run_case_row = run_case_id + 1
@@ -63,5 +63,5 @@ class DoExcel:
 
 
 if __name__ == '__main__':
-    excel = DoExcel(FilePath().receivers(), "receivers").read_data()
+    excel = DoExcel(contants.receiver_file, "receivers").read_data()
     print(excel)

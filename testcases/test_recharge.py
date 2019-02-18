@@ -8,7 +8,7 @@
 import unittest
 import re
 from libext.ddt import ddt, data
-from common.contants import FilePath
+from common import contants
 from common.request import HttpRequests
 from common.mylog import Mylog
 from common.do_testcase_excel import DoExcel
@@ -20,8 +20,7 @@ logger = Mylog("test_recharge")
 
 @ddt
 class TestRecharge(unittest.TestCase):
-    filepath = FilePath()
-    recharge_data = DoExcel(filepath.test_data_data(), "recharge").read_data()
+    recharge_data = DoExcel(contants.case_file, "recharge").read_data()
 
     @classmethod
     def setUpClass(cls):
@@ -84,8 +83,8 @@ class TestRecharge(unittest.TestCase):
                 res = "Failed"
                 raise e
             finally:
-                DoExcel(FilePath().test_data_data(), "recharge").write_data(caseid + 1, 9, str(actual))
-                DoExcel(FilePath().test_data_data(), "recharge").write_data(caseid + 1, 10, res)
+                DoExcel(contants.case_file, "recharge").write_data(caseid + 1, 9, str(actual))
+                DoExcel(contants.case_file, "recharge").write_data(caseid + 1, 10, res)
         else:
             try:
                 self.assertEqual(expected, actual)
@@ -95,8 +94,8 @@ class TestRecharge(unittest.TestCase):
                 res = "Failed"
                 raise e
             finally:
-                DoExcel(FilePath().test_data_data(), "recharge").write_data(caseid + 1, 9, str(actual))
-                DoExcel(FilePath().test_data_data(), "recharge").write_data(caseid + 1, 10, res)
+                DoExcel(contants.case_file, "recharge").write_data(caseid + 1, 9, str(actual))
+                DoExcel(contants.case_file, "recharge").write_data(caseid + 1, 10, res)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from common.mylog import Mylog
-from common.contants import FilePath
+from common import contants
 from common.do_receivers_excel import DoExcel as readreceiver
 
 logger = Mylog("Sendmail")
@@ -18,9 +18,9 @@ logger = Mylog("Sendmail")
 
 class SendMail():
     def __init__(self):
-        self.receivers = readreceiver(FilePath().receivers(), "receivers").read_data()
-        self.log_path = FilePath().log_path()
-        self.report_path = FilePath().report_path()
+        self.receivers = readreceiver(contants.receiver_file, "receivers").read_data()
+        self.log_path = contants.logs_log
+        self.report_path = contants.reports_html
 
     def send_mail(self):
         sender = "1054257352@qq.com"  # 发送者邮箱

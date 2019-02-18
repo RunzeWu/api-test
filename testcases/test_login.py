@@ -7,7 +7,7 @@
 # @Software : PyCharm
 import unittest
 from libext.ddt import ddt, data
-from common.contants import FilePath
+from common import contants
 from common.request import HttpRequests
 from common.mylog import Mylog
 from common.do_testcase_excel import DoExcel
@@ -18,8 +18,8 @@ logger = Mylog("test login")
 @ddt
 class TestLogin(unittest.TestCase):
 
-    filepath = FilePath()
-    login_data = DoExcel(filepath.test_data_data(), "login").read_data()
+    # filepath = FilePath()
+    login_data = DoExcel(contants.case_file, "login").read_data()
 
     @classmethod
     def setUpClass(cls):
@@ -51,8 +51,8 @@ class TestLogin(unittest.TestCase):
             res = "Failed"
             raise e
         finally:
-            DoExcel(FilePath().test_data_data(), "login").write_data(caseid + 1, 7, actual)
-            DoExcel(FilePath().test_data_data(), "login").write_data(caseid + 1, 8, res)
+            DoExcel(contants.case_file, "login").write_data(caseid + 1, 7, actual)
+            DoExcel(contants.case_file, "login").write_data(caseid + 1, 8, res)
 
 
 if __name__ == '__main__':

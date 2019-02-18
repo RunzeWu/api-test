@@ -7,10 +7,9 @@
 # Software  :PyCharm Community Edition
 import openpyxl
 from common.config import ReadConfig
-from common.contants import FilePath
+from common import contants
 from common.mylog import Mylog
 
-filepath = FilePath()
 logger = Mylog("读取数据")
 
 
@@ -85,7 +84,7 @@ class DoExcel:
 
 
 if __name__ == '__main__':
-    excel = DoExcel(FilePath().test_data_data(), "register").read_data()
+    excel = DoExcel(contants.case_file, "register").read_data()
     for i in excel:
         print(i, end="\n")
     # DoExcel(ProjectPath().test_data_data(), "register").update_init_data("17751811111")

@@ -7,7 +7,7 @@
 # @Software : PyCharm
 import unittest
 from libext.ddt import ddt, data
-from common.contants import FilePath
+from common import contants
 from common.request import HttpRequests
 from common.mylog import Mylog
 from common.do_testcase_excel import DoExcel
@@ -15,8 +15,7 @@ from common.mysql import MysqlUtil
 from common.myjson import MyJson
 
 
-filepath = FilePath()
-reg_data = DoExcel(filepath.test_data_data(), "register").read_data()
+reg_data = DoExcel(contants.case_file, "register").read_data()
 logger = Mylog("test_register")
 
 @ddt
@@ -62,8 +61,8 @@ class TestRegister(unittest.TestCase):
             res = "Failed"
             raise e
         finally:
-            DoExcel(FilePath().test_data_data(), "register").write_data(caseid + 1, 7, actual)
-            DoExcel(FilePath().test_data_data(), "register").write_data(caseid + 1, 8, res)
+            DoExcel(contants.case_file, "register").write_data(caseid + 1, 7, actual)
+            DoExcel(contants.case_file, "register").write_data(caseid + 1, 8, res)
 
 
 if __name__ == '__main__':

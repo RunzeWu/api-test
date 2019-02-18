@@ -9,60 +9,63 @@ import os
 import time
 # from common.config import ReadConfig
 
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目根路径
+# print(base_dir)
+data_dir = os.path.join(base_dir, "datas")  # datas文件夹路径
 
-class FilePath:
+case_file = os.path.join(data_dir, "user_test.xlsx")  # user_test.xlsx文件路径
+receiver_file = os.path.join(data_dir, "receivers.xlsx")  # receivers.xlsx文件路径
+# print(case_file)
 
-    def __init__(self):
-        self.dir_path = os.path.dirname(os.path.dirname(__file__))
+conf_dir = os.path.join(base_dir, "conf")
 
-    def global_conf_path(self):
-        path = os.path.join(self.dir_path, "conf", "global.conf")
-        return path
+test_env_conf = os.path.join(conf_dir, "test_env.conf")  # 测试环境配置文件路径
+prod_env_conf = os.path.join(conf_dir, "prod_env.conf")  # 生产环境配置文件路径
+global_conf = os.path.join(conf_dir, "global.conf")  # 测试配置文件路径
 
-    def prod_conf_path(self):
-        path = os.path.join(self.dir_path, "conf", "prod_env.conf")
-        return path
+logs_dir = os.path.join(base_dir, "logs")
+log_time = time.strftime('%Y-%m-%d')
+logs_log = os.path.join(logs_dir, log_time + ".log")
 
-    def test_conf_path(self):
-        path = os.path.join(self.dir_path, "conf", "test_env.conf")
-        return path
+testcases_dir = os.path.join(base_dir, "testcases")
 
-    def test_data_data(self):
-        path = os.path.join(self.dir_path, "datas", "user_test.xlsx")
-        return path
+reports_dir = os.path.join(base_dir, 'reports')  # reports文件夹路径
+reports_html = os.path.join(reports_dir, 'api test_report.html')  # reports文件夹路径
 
-    def receivers(self):
-        path = os.path.join(self.dir_path, "datas", "receivers.xlsx")
-        return path
-
-    def report_path(self):
-        # report_time = time.strftime("%Y-%m-%d-%H-%M-%S")
-        # report_name = report_time + " api test_report.html"
-        report_name = "api test_report.html"
-        path = os.path.join(self.dir_path, "reports", report_name)
-        # path = ReadConfig(self.conf_path()).get_value("report","file_path")+report_name
-        return path
-
-    def log_path(self):
-        log_time = time.strftime('%Y-%m-%d')
-        path = os.path.join(self.dir_path, "logs", log_time + ".log")
-        return path
-    #
-    # def api_url(self):
-    #     button = ReadConfig(self.conf_path()).get_int("env-api", "button")
-    #
-    #     """
-    #     0 测试环境
-    #     1 正式环境
-    #     """
-    #     if button == 0:
-    #         api_url = "http://47.107.168.87:8080/futureloan/mvc/api"
-    #     else:
-    #         api_url = ""
-    #
-    #     return api_url
-
-
-if __name__ == '__main__':
-    A = FilePath()
-    print(A.api_url())
+# class FilePath:
+#
+#     def __init__(self):
+#         self.dir_path = os.path.dirname(os.path.dirname(__file__))
+#
+#     def global_conf_path(self):
+#         path = os.path.join(self.dir_path, "conf", "global.conf")
+#         return path
+#
+#     def prod_conf_path(self):
+#         path = os.path.join(self.dir_path, "conf", "prod_env.conf")
+#         return path
+#
+#     def test_conf_path(self):
+#         path = os.path.join(self.dir_path, "conf", "test_env.conf")
+#         return path
+#
+#     def test_data_data(self):
+#         path = os.path.join(self.dir_path, "datas", "user_test.xlsx")
+#         return path
+#
+#     def receivers(self):
+#         path = os.path.join(self.dir_path, "datas", "receivers.xlsx")
+#         return path
+#
+#     def report_path(self):
+#         # report_time = time.strftime("%Y-%m-%d-%H-%M-%S")
+#         # report_name = report_time + " api test_report.html"
+#         report_name = "api test_report.html"
+#         path = os.path.join(self.dir_path, "reports", report_name)
+#         # path = ReadConfig(self.conf_path()).get_value("report","file_path")+report_name
+#         return path
+#
+#     def log_path(self):
+#         log_time = time.strftime('%Y-%m-%d')
+#         path = os.path.join(self.dir_path, "logs", log_time + ".log")
+#         return path

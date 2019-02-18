@@ -6,20 +6,21 @@
 # File      :config.py
 # Software  :PyCharm Community Edition
 import configparser
-from common.contants import FilePath
+from common import contants
 
 
 class ReadConfig:
     def __init__(self):
 
         self.cf = configparser.ConfigParser()
-        self.cf.read(FilePath().global_conf_path(), encoding="utf-8")
+        # self.cf.read(FilePath().global_conf_path(), encoding="utf-8")
+        self.cf.read(contants.global_conf, encoding="utf-8")
         button = self.cf.getboolean("switch", "button")
 
         if button:
-            self.cf.read(FilePath().test_conf_path(), encoding="utf-8")
+            self.cf.read(contants.test_env_conf, encoding="utf-8")
         else:
-            self.cf.read(FilePath().prod_conf_path(), encoding="utf-8")
+            self.cf.read(contants.prod_env_conf, encoding="utf-8")
 
     def get_value(self, section, option):
         return self.cf.get(section, option)
