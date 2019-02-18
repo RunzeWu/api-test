@@ -6,7 +6,7 @@
 # File      :run.py
 # Software  :PyCharm Community Edition
 import unittest
-import HTMLTestRunnerNew
+from libext import HTMLTestRunnerNew
 from testcases.test_recharge import TestRecharge
 from testcases.test_register import TestRegister
 from testcases.test_login import TestLogin

@@ -7,7 +7,7 @@
 # @Software : PyCharm Community Edition
 import unittest
 import re
-from ddt import ddt, data
+from libext.ddt import ddt, data
 from common.contants import FilePath
 from common.request import HttpRequests
 from common.mylog import Mylog

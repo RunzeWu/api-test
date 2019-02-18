@@ -7,7 +7,7 @@
 # @Software : PyCharm
 import unittest
 import re
-from ddt import ddt, data
+from libext.ddt import ddt, data
 from common.contants import FilePath
 from common.do_testcase_excel import DoExcel
 from common.mysql import MysqlUtil

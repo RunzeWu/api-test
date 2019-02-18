@@ -6,7 +6,7 @@
 # @File     : test_register.py
 # @Software : PyCharm
 import unittest
-from ddt import ddt, data
+from libext.ddt import ddt, data
 from common.contants import FilePath
 from common.request import HttpRequests
 from common.mylog import Mylog
