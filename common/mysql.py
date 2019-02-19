@@ -11,7 +11,7 @@ from common.config import ReadConfig
 
 class MysqlUtil:
 
-    def __init__(self):
+    def __init__(self, return_dict=False):
 
         # 数据库参数修改请到配置文件下
         self.database = pymysql.connect(
@@ -21,7 +21,10 @@ class MysqlUtil:
             port=ReadConfig().get_int("mysql-conf", "port"),  # MySQL数据的端口为3306，注意:切记这里不要写引号''
             database=ReadConfig().get_value("mysql-conf", "database")  # 当时
         )
-        self.cursor = self.database.cursor()  # 获取一个游标 — 也就是开辟一个缓冲区，用于存放sql语句执行的结果
+        if return_dict:
+            self.cursor = self.database.cursor(pymysql.cursors.DictCursor)  # 指定每行数据以字典的形式返回
+        else:
+            self.cursor = self.database.cursor()  # 获取一个游标 — 也就是开辟一个缓冲区，用于存放sql语句执行的结果
 
     def close_database(self):
         self.cursor.close()
@@ -33,6 +36,13 @@ class MysqlUtil:
         # 获取结果
         result = self.cursor.fetchone()
         return result[0]  # 返回结果
+
+    def fetch_all(self, sql):
+        # 执行SQL
+        self.cursor.execute(sql)
+        # 获取结果
+        results = self.cursor.fetchall()  # 返回列表 [(),()]
+        return results
 
 
 if __name__ == '__main__':

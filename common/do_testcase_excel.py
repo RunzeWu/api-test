@@ -8,9 +8,9 @@
 import openpyxl
 from common.config import ReadConfig
 from common import contants
-from common.mylog import Mylog
+from common import mylog
 
-logger = Mylog("读取数据")
+logger = mylog.get_logger("get test data")
 
 
 class DoExcel:

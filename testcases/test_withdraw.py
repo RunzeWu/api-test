@@ -11,10 +11,10 @@ from libext.ddt import ddt, data
 from common import contants
 from common.do_testcase_excel import DoExcel
 from common.mysql import MysqlUtil
-from common.mylog import Mylog
+from common import mylog
 from common.request import HttpRequests
 
-logger = Mylog("test_withdraw")
+logger = mylog.get_logger("case_withdraw")
 
 
 @ddt

@@ -6,10 +6,10 @@
 # File      :request_session.py
 # Software  :PyCharm Community Edition
 import requests
-from common.mylog import Mylog
+from common import mylog
 from common.myjson import MyJson
 
-mylog = Mylog("session_requset")
+mylog = mylog.get_logger("session_requset")
 
 
 class Request:

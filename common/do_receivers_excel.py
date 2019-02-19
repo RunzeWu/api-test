@@ -7,10 +7,10 @@
 # Software  :PyCharm Community Edition
 import openpyxl
 from common.config import ReadConfig
-from common.mylog import Mylog
+from common import mylog
 from common import contants
 
-mylog = Mylog("读取excel文件")
+mylog = mylog.get_logger("get mail receivers")
 
 
 class TestCase:

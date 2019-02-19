@@ -6,11 +6,11 @@
 # File      :request.py
 # Software  :PyCharm Community Edition
 import requests
-from common.mylog import Mylog
+from common import mylog
 from common.myjson import MyJson
 from common.config import ReadConfig
 
-logger = Mylog("http_requests")
+logger = mylog.get_logger("http_requests")
 pre_url = ReadConfig().get_value("env-api", "pre_url")
 # print(pre_url)
 

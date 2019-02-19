@@ -9,11 +9,11 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
-from common.mylog import Mylog
+from common import mylog
 from common import contants
 from common.do_receivers_excel import DoExcel as readreceiver
 
-logger = Mylog("Sendmail")
+logger = mylog.get_logger("Sendmail")
 
 
 class SendMail():

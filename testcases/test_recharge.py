@@ -10,12 +10,12 @@ import re
 from libext.ddt import ddt, data
 from common import contants
 from common.request import HttpRequests
-from common.mylog import Mylog
+from common import mylog
 from common.do_testcase_excel import DoExcel
 from common.myjson import MyJson
 from common.mysql import MysqlUtil
 
-logger = Mylog("test_recharge")
+logger = mylog.get_logger("case_recharge")
 
 
 @ddt
