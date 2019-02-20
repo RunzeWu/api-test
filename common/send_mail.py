@@ -57,7 +57,7 @@ class SendMail():
             server.sendmail(sender, receivers, message.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
             server.quit()  # 关闭连接
             logger.info("邮件发送成功")
-        except Exception:
+        except:
             logger.info("邮件发送失败")
 
 

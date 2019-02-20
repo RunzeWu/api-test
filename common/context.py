@@ -30,7 +30,7 @@ def replace(s, d):
 
 
 def replace_new(s):
-    p = "\$\{(.*?)}"
+    p="\$\{(.*?)}"
     while re.search(p, s):
         m = re.search(p, s)
         key = m.group(1)

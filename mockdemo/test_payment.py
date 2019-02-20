@@ -7,6 +7,7 @@
 # @Software : PyCharm
 import unittest
 from unittest import mock
+import ddt
 
 from mockdemo import payment
 
@@ -40,4 +41,4 @@ class PaymentTest(unittest.TestCase):
         resp = self.payment.doPay(user_id=2, card_num='1234457', amount=10.01)
         print(resp)
         self.assertEqual('fail', resp)
-        print('requestOutofSystem被调用两次：',self.payment.requestOutofSystem.call_count)
+        print('requestOutofSystem被调用两次：', self.payment.requestOutofSystem.call_count)
