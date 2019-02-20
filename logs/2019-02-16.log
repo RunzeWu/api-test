@@ -305,3 +305,4 @@
 2019-02-16 21:03:58,565-INFO-mylog.py-http_requests-日志信息:url:http://47.107.168.87:8080/futureloan/mvc/api/member/withdraw的post请求执行成功
 2019-02-16 21:03:58,730-INFO-mylog.py-test_withdraw-日志信息:*******本条测试用例执行完毕*********
 2019-02-16 21:03:58,731-INFO-mylog.py-test_withdraw-日志信息:************withdraw模块测试用例脚本执行完毕*****************
+2019-02-16 21:53:30,987-INFO-mylog.py-Sendmail-日志信息:邮件发送成功
