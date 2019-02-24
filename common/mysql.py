@@ -35,7 +35,7 @@ class MysqlUtil:
         self.cursor.execute(sql)
         # 获取结果
         result = self.cursor.fetchone()
-        return result[0]  # 返回结果
+        return result  # 返回结果
 
     def fetch_all(self, sql):
         # 执行SQL
@@ -47,7 +47,7 @@ class MysqlUtil:
 
 if __name__ == '__main__':
     A = MysqlUtil()
-    sql = "select max(MobilePhone) from member"
+    sql = "select * FROM invest WHERE LoanId = 11715 GROUP BY Amount DESC"
     res = A.fetchone(sql)
     print(type(res))
     print(res)

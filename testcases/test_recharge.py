@@ -52,7 +52,7 @@ class TestRecharge(unittest.TestCase):
         logger.info("开始执行caseId为[{}]的用例,用例标题是[{}],请求方式是[{}]".format(caseid, title, method))
 
         if param is not None and re.match(r"^1[35678]\d{9}$", param["mobilephone"]):
-            before_recharge_amount = self.mysql.fetchone("select leaveamount from member where mobilephone="+param["mobilephone"])
+            before_recharge_amount = self.mysql.fetchone("select leaveamount from member where mobilephone="+param["mobilephone"])[0]
             before_recharge_amount = float(before_recharge_amount)
             # print(before_recharge_amount, type(before_recharge_amount))
         else:

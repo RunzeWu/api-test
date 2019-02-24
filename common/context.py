@@ -44,7 +44,7 @@ def replace_new(s):
 
 if __name__ == '__main__':
 
-    s = '{"mobilephone":"${admin_user}","pwd":"${admin_pwd}"}'
+    s = '{"memberId":"${normal_member_id}","password":"${normal_pwd}","loanId":"${loan_id}","amount":"100"}'
     # data = {"admin_user": "15873171553", "admin_pwd": "123456"}
     #
     # s = replace(s, data)

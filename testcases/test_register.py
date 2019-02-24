@@ -34,7 +34,7 @@ class TestRegister(unittest.TestCase):
 
     def setUp(self):
         sql = "select max(mobilephone) from member"
-        self.max_phone = self.mysql.fetchone(sql)
+        self.max_phone = self.mysql.fetchone(sql)[0]
 
     # @unittest.skip("register")
     @data(*reg_data)

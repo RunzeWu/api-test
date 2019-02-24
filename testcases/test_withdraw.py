@@ -60,7 +60,7 @@ class TestWithdraw(unittest.TestCase):
         if param is not None and re.match(r"^1[35678]\d{9}$", param["mobilephone"]) and param["mobilephone"] is not None:
             try:
                 before_withdraw_amount = self.mysql.fetchone(
-                    "select leaveamount from member where mobilephone=" + param["mobilephone"])
+                    "select leaveamount from member where mobilephone=" + param["mobilephone"])[0]
                 before_withdraw_amount = float(before_withdraw_amount)
             except TypeError:
                 logger.error("数据库中该{}号码不存在！".format(param["mobilephone"]))

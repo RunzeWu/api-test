@@ -10,7 +10,7 @@ from common import mylog
 from common.myjson import MyJson
 from common.config import ReadConfig
 
-mylog = mylog.get_logger("session_requset")
+logger = mylog.get_logger("session_requset")
 
 
 class Request:
@@ -29,12 +29,12 @@ class Request:
 
         if method == "GET":
             res = self.session.get(url=url, params=params)
-            mylog.info('response: {0}'.format(res.text))
+            logger.info('response: {0}'.format(res.text))
         elif method == "POST":
             res = self.session.post(url=url, data=params)
-            mylog.info('response: {0}'.format(res.text))
+            logger.info('response: {0}'.format(res.text))
         else:
-            mylog.error("请检查请求方式是否正确")
+            logger.error("请检查请求方式是否正确")
             raise Exception("请检查请求方式是否正确")
         return res
 
