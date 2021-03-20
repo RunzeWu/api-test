@@ -11,7 +11,7 @@ et-xmlfile==1.0.1
 har2case==0.2.0
 idna==2.7
 jdcal==1.4
-Jinja2==2.10
+Jinja2==2.11.3
 jsonpath==0.75
 jsonpath-rw==1.4.0
 MarkupSafe==1.1.0
