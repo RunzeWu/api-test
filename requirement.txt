@@ -28,7 +28,7 @@ pytesseract==0.2.6
 pytest==4.0.2
 pytest-html==1.19.0
 pytest-metadata==1.7.0
-PyYAML==3.13
+PyYAML==5.4
 requests==2.21.0
 requests-toolbelt==0.8.0
 scandir==1.9.0
