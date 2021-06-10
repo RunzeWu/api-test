@@ -6,7 +6,7 @@ colorama==0.4.1
 colorlog==4.0.2
 ddt==1.2.0
 decorator==4.3.0
-Django==1.10.3
+Django==2.2.24
 et-xmlfile==1.0.1
 har2case==0.2.0
 idna==2.7
